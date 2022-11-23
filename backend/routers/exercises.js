@@ -16,7 +16,7 @@ router.route('/').get(async (req, res) => {
 
 // handle any post requests  by saving a new excercise to the database
 
-router.route('/add').post(() => {
+router.route('/add').post((req, res) => {
   const username = req.body.username;
   const description = req.body.description;
   const duration = Number(req.body.duration);

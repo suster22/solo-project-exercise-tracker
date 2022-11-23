@@ -12,7 +12,7 @@ const dotenv = require('dotenv').config();
 const app = express();
 /* create a new port that our server will be on. Make sure to check if
   process.env has a PORT already defined. If not, use a default port */
-const port = process.env.PORT || 5000;
+const port = 3000;
 
 /* create a generic request handler with cors middleware */
 app.use(cors());
@@ -24,7 +24,8 @@ app.use(express.json());
 that parses JSON and only looks at requests where the content type header
 matches the type option */
 
-const uri = process.env.ATLAS_URI;
+const uri =
+  'mongodb+srv://suster22:U0Kz0niRLqR0YZO8@cluster0.cwilbya.mongodb.net/?retryWrites=true&w=majority';
 
 /* connect mongoose with mongoDB using URI retreived from MongoDB atlas. Pass
   in an options object with the below */
@@ -48,8 +49,8 @@ connection.once('open', () => {
     /exercises and /users and pass in excersize router and users
     router as middleware */
 
-const exercisesRouter = require('./routes/exercises');
-const usersRouter = require('./routes/users');
+const exercisesRouter = require('./routers/exercises');
+const usersRouter = require('./routers/users');
 
 app.use('/exercises', exercisesRouter);
 app.use('/users', usersRouter);
@@ -59,5 +60,5 @@ app.use('/users', usersRouter);
    print out confirmation that server is running on specified port */
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`); 
+  console.log(`Server is running on port ${port}`);
 });
